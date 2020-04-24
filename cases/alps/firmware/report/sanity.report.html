@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block checkpoints scoped %}
+{% endblock %}
+
+
+{% block record_extras scoped %}
+<b>Result:</b>
+<pre style="margin-left: 2em">
+Min: {{tc_record.extras.min}}
+Max: {{tc_record.extras.max}}
+Avg: {{tc_record.extras.avg}}
+All: {{tc_record.extras.all}}
+</pre>
+{% endblock %}

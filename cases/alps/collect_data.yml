@@ -1,0 +1,39 @@
+# command: cd c:\src\kite\cases\alps && python -m ngta run --config=collect_data.yml
+
+log-layout: "%(asctime)-15s [%(levelname)-7s] %(threadName)-12s [%(name)20s:%(lineno)4d] - %(message)s"
+
+testbench:
+  (): alps.bench.TestBench
+  name: alps-tb1
+
+testsuites:
+  - name: Data Collect
+    tests:
+      - testcase:
+          path: alps.collect_data.collect_akbk_for_angles
+          parameters:
+            angles: "H@-60:60:2*V@-50:50:2"
+            nframe: 5
+            interval: 0
+            output_dir: 'C:\src\collected_data'
+
+      - testcase:
+          path: alps.collect_data.collect_ant_calib_for_angles
+          parameters:
+            angles: "H@-60:60:2*V@-50:50:2"
+            range_min:
+            range_max:
+            ignore_error: False
+            interval: 0
+            output: 'C:\src\collect_ant_calib_for_angles.txt'
+
+      - testcase:
+          path: alps.collect_data.collect_akbk_for_one_emulated_target
+          parameters:
+            rcs: 20
+            nframe: 1000
+            output: 'D:\R{rng}V{vel}Ang{ang}.txt'
+          iterations:
+            rng: [80]
+            vel: [0]
+            ang: !xrange "-40:40:5"
